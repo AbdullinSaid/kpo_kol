@@ -78,6 +78,7 @@ class Cart(Resource):
         current_cart[id] += request.json['number']
         new_number = book['number'] - request.json['number']
         connection.execute(f'UPDATE books SET number={new_number} WHERE id IN ({id})')
+        connection.commit()
         connection.close()
         resp = jsonify('added to cart')
         resp.status_code = 200
