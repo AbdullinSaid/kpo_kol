@@ -88,6 +88,7 @@ class Orders(Resource):
         for key, value in current_cart.items():
             book = connection.execute(f'SELECT * FROM books WHERE id IN ({key})').fetchone()
             total_price += book['price'] * value
+        current_cart.clear()
         resp = jsonify(f'Total price is {total_price}')
         resp.status_code = 200
         return resp
