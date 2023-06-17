@@ -65,6 +65,10 @@ class Cart(Resource):
             resp = jsonify('message: no book with such id')
             resp.status_code = 404
             return resp
+        if request.json['number'] < 1:
+            resp = jsonify('message: zero or less books')
+            resp.status_code = 401
+            return resp
         if request.json['number'] > book['number']:
             resp = jsonify('message: too much books')
             resp.status_code = 401
